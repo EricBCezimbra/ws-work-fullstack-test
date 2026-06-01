@@ -116,6 +116,14 @@ docker-compose up --build
 
 ---
 
+## ☁️ Infraestrutura e Deploy na Nuvem
+
+- **Front-end:** Hospedado na Vercel, garantindo entrega rápida e contínua.
+- **Back-end & Banco de Dados:** Hospedados no Render (FastAPI + PostgreSQL).
+- **Estratégia de Keep-Alive (Prevenção de Cold Start):** Como o plano gratuito do Render hiberna a API após 15 minutos de inatividade, foi implementada uma estratégia de *Keep-Alive*. Um serviço externo (inicalmente feito com uptimerobot, mas por alguns problemas do plano gratuito migrei para o cron-job.org) está configurado para realizar pings periódicos nos endpoints da API. Isso garante que a máquina permaneça ativa 24/7, evitando erros de *timeout* no primeiro carregamento do Front-end e proporcionando uma experiência de uso fluida durante a avaliação.
+
+---
+
 ## 📚 Documentação de Componentes Reutilizáveis
 
 Atendendo ao requisito de documentação do Front-end, o componente principal de exibição, `<VehicleCard />`, foi desenhado para ser totalmente **Dumb/Presentational**.
