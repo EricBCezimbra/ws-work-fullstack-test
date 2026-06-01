@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
@@ -34,6 +34,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.head("/", tags=["Health Check"])
+def health_check_head():
+    """Rota de Health Check exclusiva para o Uptimerobot, que usa apenas método HEAD na verificação de rota."""
+    return Response(status_code=200)
 
 @app.get("/", tags=["Health Check"])
 def read_root():
